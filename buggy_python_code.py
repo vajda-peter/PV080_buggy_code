@@ -29,16 +29,15 @@ def fetch_website(urllib_version, url):
     """Fetches the website."""
     # Import the requested version (2 or 3) of urllib
     version_pattern = "(?:3)?\s+(\d+\.\d+\.\d+)"
-    if not re.match(urlib_version, version_pattern):
-        raise ValueError(urlib_version)
-    exec(f"import urllib{urllib_version} as urllib", globals())
-    # Fetch and print the requested URL
+    if re.match(urlib_version, version_pattern):
+        exec(f"import urllib{urllib_version} as urllib", globals())
+        # Fetch and print the requested URL
 
-    try:
-        http = urllib.PoolManager()
-        r = http.request('GET', url)
-    except:
-        print('Exception')
+        try:
+            http = urllib.PoolManager()
+            r = http.request('GET', url)
+        except:
+            print('Exception')
 
 
 def load_yaml(filename):
