@@ -2,6 +2,7 @@ import sys
 import os
 import yaml
 import flask
+import re
 
 APP = flask.Flask(__name__)
 
@@ -60,6 +61,9 @@ if __name__ == '__main__':
         print_nametag(input("Please format your nametag: "), new_person)
     elif choice == "2":
         urlib_version = input("Choose version of urllib: ")
+        version_patter = "(?:3)?\s+(\d+\.\d+\.\d+)"
+        if not re.match(urlib_version, version_patter):
+            raise ValueError(urlib_version)
         fetch_website(urlib_version, url="https://www.google.com")
     elif choice == "3":
         load_yaml(input("File name: "))
